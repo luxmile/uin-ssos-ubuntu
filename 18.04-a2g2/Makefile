@@ -24,10 +24,10 @@ help: ## This help.
 # DOCKER TASKS
 # Build the container
 build: ## Build the container
-	docker build -t $(ORG_NAME)/$(APP_NAME):$(TAG_NAME) -t $(ORG_NAME)/$(APP_NAME):latest .
+	docker build -t $(ORG_NAME)/$(APP_NAME):$(TAG_NAME) .
 
 build-nc: ## Build the container without caching
-	docker build --no-cache -t $(ORG_NAME)/$(APP_NAME):$(TAG_NAME) -t $(ORG_NAME)/$(APP_NAME):latest .
+	docker build --no-cache -t $(ORG_NAME)/$(APP_NAME):$(TAG_NAME) .
 
 run: ## Run container on port configured in `config.env`
 	docker run -d --env-file=./.config.env -p=$(OPORT):$(IPORT) --name $(RUN_NAME) $(ORG_NAME)/$(APP_NAME):$(TAG_NAME)
@@ -56,13 +56,7 @@ prune-volumes: ## Remove unused/stopped volume(s)
 release: build-nc publish ## Make a release by building and publishing the `{version}` and `latest` tagged containers to ECR
 
 # Docker publish
-publish: publish-latest publish-version ## Publish the `{version}` ans `latest` tagged containers to ECR
-
-publish-latest: ## Publish the `latest` taged container to ECR
-	@echo 'publish latest to $(ORG_NAME)/$(APP_NAME)'
-	docker push $(ORG_NAME)/$(APP_NAME):latest
-
-publish-version: ## Publish the `{version}` taged container to ECR
+publish: ## Publish the `{version}` taged container to ECR
 	@echo 'publish $(VERSION) to $(ORG_NAME)'
 	docker push $(ORG_NAME)/$(APP_NAME):$(TAG_NAME)
 

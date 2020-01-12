@@ -21,3 +21,10 @@ deb-src https://lemonldap-ng.org/deb stable main\n" \
     # cleanup:
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+COPY base/entpoint.sh /app
+
+EXPOSE 80
+STOPSIGNAL SIGWINCH
+
+ENTRYPOINT /app
