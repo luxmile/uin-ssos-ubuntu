@@ -1,0 +1,18 @@
+#
+docker exec ssos-l3a2p7g2 ps aux
+docker cp base/vhost.conf ssos-l3a2p7g2:/etc/apache2/conf.d/
+docker exec ssos-l3a2p7g2 cat /etc/apache2/conf.d/vhost.conf
+docker restart ssos-l3a2p7g2 
+
+docker exec ssos-l3a2p7g2 ls -lh /
+docker exec ssos-l3a2p7g2 ls -lh /var/log/apache2/
+
+docker exec ssos-l3a2p7g2 tail /var/log/apache2/error.log
+docker exec ssos-l3a2p7g2 tail -f /var/log/apache2/error.log
+docker exec ssos-l3a2p7g2 tail -n 0 -f /var/log/apache2/error.log
+
+docker exec ssos-l3a2p7g2 ls -lha /var/www/thml/
+
+docker cp base/.info.php ssos-l3a2p7g2:/home/app/web/
+docker restart ssos-l3a2p7g2 
+
