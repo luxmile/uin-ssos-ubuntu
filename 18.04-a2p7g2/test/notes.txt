@@ -1,7 +1,14 @@
 #
 docker exec ssos-uBa2p7g2 ps aux
-docker cp base/vhost.conf ssos-uBa2p7g2:/etc/apache2/conf.d/
-docker exec ssos-uBa2p7g2 cat /etc/apache2/conf.d/vhost.conf
+docker exec ssos-uBa2p7g2 ls -lh /etc/apache2/sites-available/
+docker cp base/vhost.conf ssos-uBa2p7g2:/etc/apache2/sites-available/
+docker exec ssos-uBa2p7g2 cat /etc/apache2/sites-available/vhost.conf
+docker exec ssos-uBa2p7g2 chown 0:0 /etc/apache2/sites-available/vhost.conf
+docker exec ssos-uBa2p7g2 chmod a+r /etc/apache2/sites-available/vhost.conf
+
+docker exec ssos-uBa2p7g2 ls -lh /etc/apache2/sites-enabled/
+docker exec ssos-uBa2p7g2 rm /etc/apache2/sites-enabled/000-default.conf
+docker exec ssos-uBa2p7g2 ln -s ../sites-available/vhost.conf /etc/apache2/sites-enabled/default.conf
 docker restart ssos-uBa2p7g2 
 
 docker exec ssos-uBa2p7g2 ls -lh /
