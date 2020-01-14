@@ -19,7 +19,8 @@ deb-src https://lemonldap-ng.org/deb stable main\n" \
     #
     # cleanup:
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* /usr/share/doc/* /usr/share/man/* && \
+    rm -f /var/log/*log /var/log/apache2/*log var/log/apt/*log 
 
 COPY base/entpoint.sh /app
 
