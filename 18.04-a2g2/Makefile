@@ -62,8 +62,14 @@ publish: ## Publish the `{version}` taged container to ECR
 
 # =============================================================================
 # HELPERS
-ls: ## Show images
+la: ## Show images
 	docker images
+
+ls: ## Show images
+	docker images | grep $(APP_NAME)
+
+lt: ## Show images
+	docker images | grep $(TAG_NAME)
 
 ps: ## Show running container
 	docker ps
