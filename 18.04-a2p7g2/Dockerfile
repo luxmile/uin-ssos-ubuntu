@@ -12,10 +12,10 @@ deb-src https://lemonldap-ng.org/deb stable main\n" \
     chmod a+r /etc/apt/sources.list.d/lemonldap-ng.list && \
     apt-get -y update && \
     DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true \
-        apt-get -y install --no-install-recommends \
-        libapache2-mod-perl2 libapache2-mod-fcgid liblemonldap-ng-handler-perl && \
+        apt-get -y install libapache2-mod-perl2 libapache2-mod-fcgid liblemonldap-ng-handler-perl libnet-ldap-perl libredis-perl && \
     a2enmod fcgid perl alias rewrite headers && \
     #
     # cleanup:
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* /usr/share/doc/* /usr/share/man/* && \
+    rm -f /var/log/*log /var/log/apache2/*log var/log/apt/*log 
