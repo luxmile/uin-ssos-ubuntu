@@ -5,7 +5,7 @@ ARG APP_BUILD
 
 RUN printf "Build of ${APP_BUILD}, date: %s\n" `date -u +"%Y-%m-%dT%H:%M:%SZ"` >> /etc/BUILD && \
     #
-    # install webserver and required perl modules:
+    # install web server and required perl modules:
     apt-get -y update && \
     apt-get -y install --no-install-recommends apache2 software-properties-common && \
     wget -O - https://lemonldap-ng.org/_media/rpm-gpg-key-ow2 | apt-key add - && \

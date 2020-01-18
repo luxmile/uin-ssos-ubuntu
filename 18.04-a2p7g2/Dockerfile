@@ -1,6 +1,8 @@
 FROM ptipd/uin-devs-ubuntu:18.04-apache2-php7
 
-RUN printf "Build of ptipd/uin-ssos-ubuntu:18.04-apache2-php7-llng2, date: %s\n" `date -u +"%Y-%m-%dT%H:%M:%SZ"` >> /etc/BUILD && \
+ARG APP_BUILD
+
+RUN printf "Build of ${APP_BUILD}, date: %s\n" `date -u +"%Y-%m-%dT%H:%M:%SZ"` >> /etc/BUILD && \
     #
     # install required perl modules:
     wget -O - https://lemonldap-ng.org/_media/rpm-gpg-key-ow2 | apt-key add - && \
