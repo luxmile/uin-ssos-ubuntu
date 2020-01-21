@@ -25,13 +25,16 @@ deb-src https://lemonldap-ng.org/deb stable main\n" \
     useradd -u ${CFG_ID} -g cfg -s /usr/sbin/nologin -d /opt cfg && \
     sed -i 's/80/0.0.0.0:80/' /etc/apache2/ports.conf && \
     sed -i 's/443/0.0.0.0:443/' /etc/apache2/ports.conf && \
+    echo "#!/bin/sh\n\
+set -e\n\
+rm -f /run/apache2/apache2.pid\n\
+exec apache2ctl -DFOREGROUND" > /app && \
+    chmod 750 /app && \
     #
     # cleanup:
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /usr/share/doc/* /usr/share/man/* && \
     rm -f /var/log/*log /var/log/apache2/*log var/log/apt/*log 
-
-COPY base/entpoint.sh /app
 
 EXPOSE 80
 STOPSIGNAL SIGWINCH
