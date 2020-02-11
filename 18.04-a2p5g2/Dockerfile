@@ -1,4 +1,4 @@
-FROM ptipd/uin-devs-ubuntu:1.1_18.04-apache2-php5
+FROM ptipd/uin-devs-ubuntu:1.3_18.04-apache2-php5
 
 ARG APP_BUILD
 
