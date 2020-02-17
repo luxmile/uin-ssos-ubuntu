@@ -1,4 +1,5 @@
-FROM ptipd/uin-devs-ubuntu:1.5_18.04-apache2.4-php7.2
+ARG OWN_BASE
+FROM ${OWN_BASE}
 
 ARG APP_BUILD
 
